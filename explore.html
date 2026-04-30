@@ -1,0 +1,1699 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore | Aksara Batik</title>
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)" />
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin />
+  <link
+    href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap)"
+    rel="stylesheet" />
+  <style>
+    /*>>> CSS 1: FONDASI UTAMA---------*/
+    :root {
+      --primary: #74816c;
+      --soft-pink: #d1a9a5;
+      --accent: #ae6965;
+      --warm-brown: #a58871;
+      --cream: #e5dfd6;
+      --white: #ffffff;
+      --black: #1a1a1a;
+      --text-dark: #2c2c2c;
+      --text-light: #6b6b6b;
+
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Montserrat", -apple-system, sans-serif;
+      --font-heading: "Playfair Display", serif;
+      --font-body: "Lato", sans-serif;
+
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+      --radius: 8px;
+      --radius-lg: 16px;
+
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /*>>> CSS 2: HEADER DAN NAVBAR---------*/
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 0;
+      background-color: rgba(253, 251, 248, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(166, 145, 122, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 120px !important;
+      padding-right: 120px !important;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: #a6917a;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: var(--primary-burgundy);
+      transition: var(--transition);
+    }
+
+    .dropdown-container {
+      position: relative;
+    }
+
+    .about-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--primary-burgundy);
+      list-style: none;
+      border-radius: 12px !important;
+      overflow: hidden;
+      margin-top: 8px;
+      min-width: 170px;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .about-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .about-menu li {
+      text-align: left !important;
+      border: none !important;
+    }
+
+    .about-menu li a {
+      display: block;
+      padding: 14px 22px;
+      text-align: left !important;
+      /* ⬅️ paksa kiri */
+      justify-content: flex-start !important;
+      border: none !important;
+    }
+
+    /*>>> CSS 3: TYPOGRAPHY---------*/
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      font-weight: 300;
+      max-width: 500px;
+    }
+
+    /*>>> CSS 4: PENGATURAN LAYOUT---------*/
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    /*>>> CSS 5: HERO SECTION---------*/
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      max-height: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .hero__background {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero__background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          rgba(116, 129, 108, 0.3) 0%,
+          rgba(26, 26, 26, 0.5) 100%);
+      z-index: 2;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: var(--white);
+      padding: 2rem;
+    }
+
+    .hero__label {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .hero__subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+      line-height: 1.8;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+      opacity: 0.7;
+      animation: bounce 2s infinite;
+    }
+
+    .hero__scroll span {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--white);
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(10px);
+      }
+    }
+
+    /*>>> CSS 6: CAROUSEL MIX & MATCH---------*/
+    .carousel-section {
+      background: var(--white);
+    }
+
+    .carousel-section .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .carousel__viewport {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+
+    .carousel__track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel__slide {
+      flex: 0 0 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .carousel__item {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .carousel__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: var(--transition);
+    }
+
+    .carousel__item:hover img {
+      transform: scale(1.05);
+    }
+
+    .carousel__item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+          rgba(26, 26, 26, 0.6) 0%,
+          transparent 50%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .carousel__item:hover .carousel__item-overlay {
+      opacity: 1;
+    }
+
+    .carousel__item-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      color: var(--white);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .carousel__item:hover .carousel__item-caption {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .carousel__item-caption h4 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .carousel__item-caption p {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .carousel__nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .carousel__btn {
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--primary);
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      color: var(--primary);
+    }
+
+    .carousel__btn:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .carousel__btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .carousel__dots {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .carousel__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--soft-pink);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .carousel__dot.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    /*>>> CSS 7: KATEGORI PRODUK---------*/
+    .categories-section .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .category-card {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .category-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+          rgba(116, 129, 108, 0.8) 0%,
+          rgba(116, 129, 108, 0.2) 50%,
+          transparent 100%);
+      transition: var(--transition);
+    }
+
+    .category-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .category-card:hover .category-card__overlay {
+      background: linear-gradient(to top,
+          rgba(174, 105, 101, 0.85) 0%,
+          rgba(174, 105, 101, 0.3) 50%,
+          transparent 100%);
+    }
+
+    .category-card__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .category-card__title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-card__title {
+      transform: translateY(-5px);
+    }
+
+    .category-card__count {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
+
+    /*>>> CSS 8: PROMOTION SECTION---------*/
+    .promo-section {
+      background: var(--white);
+    }
+
+    .promo-section .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .promo-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .promo-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .promo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .promo-card__image {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .promo-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .promo-card:hover .promo-card__image img {
+      transform: scale(1.05);
+    }
+
+    .promo-card__tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .promo-card__content {
+      padding: 1.5rem;
+    }
+
+    .promo-card__category {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .promo-card__title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .promo-card__price {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .promo-card__price-old {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: line-through;
+    }
+
+    .promo-card__price-new {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /*>>> CSS 9: POP-UP SECTION---------*/
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(26, 26, 26, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #fdfbf8;
+      margin: 10vh auto;
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 700px;
+      border-radius: var(--radius-lg);
+      /* Sama dengan kartu promo kamu */
+      box-shadow: var(--shadow-medium);
+      animation: fadeInModal 0.4s ease;
+    }
+
+    .modal-body {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .modal-image-container img {
+      width: 260px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    .modal-details {
+      flex: 1;
+    }
+
+    .modal-details h2 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      /* Ukuran lebih kecil */
+      font-weight: 400;
+      /* Lebih tipis */
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-price {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-desc {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      /* Lebih kecil */
+      font-weight: 300;
+      /* Lebih tipis */
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 1.5rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.3;
+    }
+
+    @keyframes fadeInModal {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .modal-body {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .modal-image-container img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    /*>>> CSS 10: FEATURED & SIGNATURED SECTION---------*/
+    .featured-section {
+      padding: 0;
+      position: relative;
+    }
+
+    .featured-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+    }
+
+    .featured-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .featured-image--secondary {
+      position: absolute;
+      bottom: 2rem;
+      right: -3rem;
+      width: 45%;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .featured-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem;
+      background: var(--white);
+    }
+
+    .featured-content .section-label {
+      margin-bottom: 2rem;
+    }
+
+    .featured-content .section-title {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .featured-story {
+      font-size: 1.1rem;
+      line-height: 2;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      max-width: 450px;
+    }
+
+    .featured-quote {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid var(--soft-pink);
+      margin: 3rem 0;
+    }
+
+    .featured-quote p {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    .featured-signature {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .featured-signature__line {
+      width: 40px;
+      height: 1px;
+      background: var(--warm-brown);
+    }
+
+    .featured-signature__text {
+      font-size: 0.85rem;
+      color: var(--warm-brown);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /*>>> CSS 11: FOOTER SIMPLE---------*/
+    footer {
+      background-color: var(--bg-cream);
+      padding: 80px 0 40px 0;
+      border-top: 1px solid #e5e1da;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      color: var(--primary-burgundy);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: #666;
+      max-width: 300px;
+      line-height: 1.8;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--primary-burgundy);
+      margin-bottom: 25px;
+      border-bottom: 1px solid #d4c3c3;
+      display: inline-block;
+    }
+
+    .footer-links {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #555;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-burgundy);
+    }
+
+    .footer-contact {
+      font-size: 14px;
+      color: #555;
+      line-height: 2;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 30px;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: #999;
+    }
+
+    /*>>> CSS 12: MODE HP/TABLET---------*/
+    @media (max-width: 1200px) {
+      .promo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .featured-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-image {
+        min-height: 60vh;
+      }
+
+      .featured-image--secondary {
+        right: 2rem;
+        bottom: -3rem;
+      }
+
+      .featured-content {
+        padding: 4rem 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 4rem 0;
+      }
+
+      .container {
+        padding: 0 1.25rem;
+      }
+
+      .hero__title {
+        font-size: 2.5rem;
+      }
+
+      .carousel__slide {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .carousel__item {
+        aspect-ratio: 4/5;
+      }
+
+      .carousel__item-caption {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .carousel__item-overlay {
+        opacity: 1;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .category-card {
+        aspect-ratio: 16/9;
+      }
+
+      .promo-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .featured-image--secondary {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        min-height: 500px;
+      }
+
+      .hero__subtitle {
+        font-size: 1rem;
+      }
+
+      .carousel__nav {
+        gap: 1rem;
+      }
+
+      .carousel__btn {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .about-menu {
+        position: static;
+        transform: none;
+        width: 100%;
+      }
+
+      .hidden {
+        transform: none;
+        display: none;
+      }
+
+      .show {
+        display: block;
+      }
+    }
+
+    /*>>> CSS 13: DROPDOWN NAVBAR KHUSUS ABOUT---------*/
+    .dropdown-container {
+      position: relative;
+      /* Agar posisi menu mengikuti tombol About */
+    }
+
+    /* Tampilan Menu Dropdown (Cokelat sesuai gambar) */
+    .about-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #5d3a3a;
+      list-style: none;
+      min-width: 150px;
+      padding: 0;
+      margin-top: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 2000;
+    }
+
+    .about-menu li a {
+      color: white !important;
+      padding: 12px 20px;
+      display: block;
+      font-size: 14px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.3s;
+    }
+
+    .about-menu li a:hover {
+      background-color: #724b4b;
+    }
+
+    /* Logika Sembunyi/Muncul */
+    .hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-10px);
+    }
+
+    .show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /*>>> CSS 14: ANIMATIONS---------*/
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- === HTML 1: HEADER DAN NAVBAR === -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">AB</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown-container">
+          <a href="javascript:void(0)" class="about-trigger" onclick="toggleAbout()">About</a>
+          <ul id="about-dropdown" class="about-menu hidden">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="backstory.html">Backstory</a></li>
+          </ul>
+        </li>
+        <li><a href="explore.html">Explores</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- === HTML 2: HERO SECTION === -->
+  <section class="hero">
+    <div class="hero__background">
+      <img src="Cover Explore.jpg" alt="Aksara Batik Collection" />
+    </div>
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <p class="hero__label">Koleksi 2026</p>
+      <h1 class="hero__title">Explore Aksara Batik</h1>
+      <p class="hero__subtitle">
+        Aksara Batik menghadirkan keindahan tradisi dalam balutan modern,
+        untuk kamu yang ingin tampil elegan dengan rasa yang hangat dan
+        bermakna.
+      </p>
+    </div>
+
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- === HTML 3: FEATURED/SIGNATURED === -->
+  <section class="featured-section">
+    <div class="featured-wrapper">
+      <div class="featured-image">
+        <img src="Signature Collection.jpg" alt="Aksara Batik Signature Collection" />
+      </div>
+
+      <div class="featured-content">
+        <p class="section-label">Signature Collection</p>
+        <h2 class="section-title">Warisan yang Hidup dalam Setiap Helai</h2>
+
+        <p class="featured-story">
+          Aksara Batik lahir dari kecintaan akan warisan budaya Indonesia.
+          Setiap motif yang kami hadirkan adalah hasil perpaduan antara
+          tradisi turun-temurun dengan sentuhan kontemporer, menciptakan karya
+          yang tak lekang oleh waktu.
+        </p>
+
+        <p class="featured-story">
+          Dikerjakan oleh tangan-tangan terampil pengrajin batik
+          berpengalaman, setiap helai kain bercerita tentang dedikasi,
+          ketelitian, dan kebanggaan akan identitas budaya kita.
+        </p>
+
+        <blockquote class="featured-quote">
+          <p>
+            "Batik bukan sekadar kain, melainkan aksara kehidupan yang
+            tertulis dalam setiap guratan dan warna."
+          </p>
+        </blockquote>
+
+        <div class="featured-signature">
+          <div class="featured-signature__line"></div>
+          <span class="featured-signature__text">Aksara Batik — Est. 2018</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === HTML 4: CAROUSEL MIX & MATCH == -->
+  <section class="carousel-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Style Inspiration</p>
+        <h2 class="section-title">Mix & Match</h2>
+        <p class="section-subtitle">
+          Temukan kombinasi yang paling berbisik tentang dirimu
+        </p>
+      </div>
+
+      <div class="carousel">
+        <div class="carousel__viewport">
+          <div class="carousel__track" id="carouselTrack">
+            <!-- Slide 1 -->
+            <div class="carousel__slide">
+              <div class="carousel__item">
+                <img src="Casual Look.jpg" alt="Casual Style" />
+                <div class="carousel__item-overlay"></div>
+                <div class="carousel__item-caption">
+                  <h4>Casual Look</h4>
+                  <p>Sederhana nyaman dan tetap terlihat rapi</p>
+                </div>
+              </div>
+              <div class="carousel__item">
+                <img src="Street Style.jpg" alt="Street Style" />
+                <div class="carousel__item-overlay"></div>
+                <div class="carousel__item-caption">
+                  <h4>Street Style</h4>
+                  <p>Berani ekspresif dan penuh energi</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel__slide">
+              <div class="carousel__item">
+                <img src="Elegant Look.jpg" alt="Elegant Look" />
+                <div class="carousel__item-overlay"></div>
+                <div class="carousel__item-caption">
+                  <h4>Elegant Look</h4>
+                  <p>Anggun dan tak lekang waktu</p>
+                </div>
+              </div>
+              <div class="carousel__item">
+                <img src="Office Chic.jpg" alt="Office Chic" />
+                <div class="carousel__item-overlay"></div>
+                <div class="carousel__item-caption">
+                  <h4>Office Chic</h4>
+                  <p>Profesional dengan sentuhan tradisional</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel__slide">
+              <div class="carousel__item">
+                <img src="Weekend Vibes.jpg" alt="Weekend Vibes" />
+                <div class="carousel__item-overlay"></div>
+                <div class="carousel__item-caption">
+                  <h4>Weekend Vibes</h4>
+                  <p>Santai ringan dan penuh kebebasan</p>
+                </div>
+              </div>
+              <div class="carousel__item">
+                <img src="Evening Glamour.jpg" alt="Evening Glamour" />
+                <div class="carousel__item-overlay"></div>
+                <div class="carousel__item-caption">
+                  <h4>Evening Glamour</h4>
+                  <p>Mewah untuk malam istimewa</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__nav">
+          <button class="carousel__btn" id="prevBtn" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <div class="carousel__dots" id="carouselDots">
+            <button class="carousel__dot active" data-index="0" aria-label="Slide 1"></button>
+            <button class="carousel__dot" data-index="1" aria-label="Slide 2"></button>
+            <button class="carousel__dot" data-index="2" aria-label="Slide 3"></button>
+          </div>
+
+          <button class="carousel__btn" id="nextBtn" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === HTML 5: KATEGORI PRODUK == -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Koleksi Kami</p>
+        <h2 class="section-title">Kategori Pilihan</h2>
+        <p class="section-subtitle">
+          Setiap kategori menyimpan cerita yang menantimu
+        </p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card">
+          <img src="Pakaian Wanita.jpg" alt="Pakaian Wanita" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Women</h3>
+            <p class="category-card__count">30 Koleksi</p>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Pakaian Pria.jpg" alt="Pakaian Pria" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Men</h3>
+            <p class="category-card__count">15 Koleksi</p>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Hijab.jpg" alt="Hijab Collection" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Hijab</h3>
+            <p class="category-card__count">10 Koleksi</p>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Accesories.jpg" alt="Scarf" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Accesories</h3>
+            <p class="category-card__count">18 Koleksi</p>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Purses.jpg" alt="Purses" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Purses</h3>
+            <p class="category-card__count">10 Koleksi</p>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Sepatu.jpg" alt="Home & Living" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Shoes</h3>
+            <p class="category-card__count">7 Koleksi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === HTML 6: POP-UP SECTION == -->
+  <div id="productModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img id="modalImg" src="" alt="Detail Produk" />
+        </div>
+
+        <div class="modal-details">
+          <h2 id="modalTitle"></h2>
+          <p id="modalPrice" class="modal-price"></p>
+          <hr style="
+                border: 0;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+                margin-bottom: 15px;
+              " />
+          <p id="modalDesc" class="modal-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === HTML 7: PROMOTION SECTION == -->
+  <section class="promo-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="promo-badge">New Arrival</span>
+        <h2 class="section-title">Special Offer</h2>
+        <p class="section-subtitle">
+          Koleksi pilihan dengan penawaran istimewa terbatas
+        </p>
+      </div>
+
+      <div class="promo-grid">
+        <div class="promo-card">
+          <div class="promo-card__image">
+            <img src="Seri Loka.jpg" alt="Loka" style="cursor: pointer" onclick="
+                  openModal(
+                    'Seri Loka.jpg',
+                    'Aksara Batik Seri Loka',
+                    'Rp 255.000',
+                    'Aksara Batik Seri Loka merupakan outer berbahan katun premium yang ringan dan breathable, dirancang dengan siluet lembut yang jatuh anggun mengikuti gerak tubuh. Dihiasi motif yang terinspirasi dari harmoni alam dan kehidupan, melambangkan keseimbangan, ketenangan, serta keindahan dalam kesederhanaan, menjadikannya pilihan sempurna untuk tampilan feminin yang elegan dan effortless dalam berbagai kesempatan.',
+                  )
+                " />
+            <span class="promo-card__tag">-30%</span>
+          </div>
+          <div class="promo-card__content">
+            <p class="promo-card__category">Outer</p>
+            <h4 class="promo-card__title">Aksara Batik Seri Loka</h4>
+            <div class="promo-card__price">
+              <span class="promo-card__price-old">Rp 365.000</span>
+              <span class="promo-card__price-new">Rp 255.000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <div class="promo-card__image">
+            <img src="Sekar Series.jpg" alt="Sekar" style="cursor: pointer" onclick="
+                  openModal(
+                    'Sekar Series.jpg',
+                    'Aksara Batik Seri Sekar',
+                    'Rp 366.750',
+                    'Aksara Batik Seri Sekar merupakan outer berbahan jacquard halus dengan tekstur mewah dan siluet terstruktur yang membingkai tubuh secara anggun. Motif floralnya terinspirasi dari keindahan bunga yang bermekaran, melambangkan kelembutan, pertumbuhan, dan pesona yang abadi. Menghadirkan tampilan yang manis, romantis, sekaligus berkelas untuk momen-momen istimewa.',
+                  )
+                " />
+            <span class="promo-card__tag">-25%</span>
+          </div>
+          <div class="promo-card__content">
+            <p class="promo-card__category">Outer</p>
+            <h4 class="promo-card__title">Aksara Batik Seri Sekar</h4>
+            <div class="promo-card__price">
+              <span class="promo-card__price-old">Rp 489.000</span>
+              <span class="promo-card__price-new">Rp 366.750</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <div class="promo-card__image">
+            <img src="Seri Rimbun.jpg" alt="Rimbun" style="cursor: pointer" onclick="
+                  openModal(
+                    'Seri Rimbun.jpg',
+                    'Aksara Batik Seri Rimbun',
+                    'Rp 259.000',
+                    'Aksara Batik Seri Rimbun merupakan outer berbahan semi-silk yang halus dengan jatuh flowy yang elegan, menciptakan siluet dinamis yang memikat. Motifnya terinspirasi dari lebatnya dedaunan yang melambangkan kehidupan, kesuburan, dan energi yang terus tumbuh. Menjadikannya pilihan tepat untuk tampil standout dengan sentuhan tradisi yang kaya namun tetap modern.',
+                  )
+                " />
+            <span class="promo-card__tag">-30%</span>
+          </div>
+          <div class="promo-card__content">
+            <p class="promo-card__category">Outer</p>
+            <h4 class="promo-card__title">Aksara Batik Seri Rimbun</h4>
+            <div class="promo-card__price">
+              <span class="promo-card__price-old">Rp 370.000</span>
+              <span class="promo-card__price-new">Rp 259.000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <div class="promo-card__image">
+            <img src="Seri Nirmana.jpg" alt="Nirmana" style="cursor: pointer" onclick="
+                  openModal(
+                    'Seri Nirmana.jpg',
+                    'Aksara Batik Seri Nirmana',
+                    'Rp 320.000',
+                    'Aksara Batik Seri Nirmana merupakan outer berbahan katun dobby dengan tekstur subtle yang memberikan dimensi halus pada tampilan, dirancang dengan siluet clean yang modern dan refined. Motif geometrisnya terinspirasi dari keseimbangan bentuk dan komposisi visual, melambangkan harmoni, keteraturan, dan keindahan dalam struktur. Menciptakan gaya minimalis yang elegan dan penuh karakter.',
+                  )
+                " />
+            <span class="promo-card__tag">-20%</span>
+          </div>
+          <div class="promo-card__content">
+            <p class="promo-card__category">Outer</p>
+            <h4 class="promo-card__title">Aksara Batik Seri Nirmana</h4>
+            <div class="promo-card__price">
+              <span class="promo-card__price-old">Rp 400.000</span>
+              <span class="promo-card__price-new">Rp 320.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === HTML 8: FOOTER == -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">AB</span>
+          <p class="footer-tagline">
+            Menghadirkan keindahan warisan budaya Indonesia melalui desain
+            batik modern yang elegan untuk gaya hidup masa kini.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="profile.html">Tentang Kami</a></li>
+            <li><a href="explore.html">Koleksi</a></li>
+            <li><a href="backstory.html">Backstory</a></li>
+            <li><a href="contact.html">Hubungi Kami</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Get in Touch</h4>
+          <div class="footer-contact">
+            <p>📍 Jl. Raya ITS No. 123, Surabaya</p>
+            <p>📞 +62 821-4071-4633</p>
+            <p>✉️ aksarabatik.ofc@gmail.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 AKSARA BATIK. INDONESIAN HERITAGE REIMAGINED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    //~~~~~ JAVASCRIPT 01: CAROUSEL~~~~~//
+    document.addEventListener("DOMContentLoaded", function () {
+      const track = document.getElementById("carouselTrack");
+      const dots = document.querySelectorAll(".carousel__dot");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      let currentIndex = 0;
+      const totalSlides = 3;
+      let autoplayInterval;
+      function updateCarousel() {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentIndex);
+        });
+      }
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+      }
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+      }
+      function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+      }
+      function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 5000);
+      }
+      function stopAutoplay() {
+        clearInterval(autoplayInterval);
+      }
+
+      //~~~~~ JAVASCRIPT 02: SLIDER CONTROLS~~~~~//
+      nextBtn.addEventListener("click", () => {
+        stopAutoplay();
+        nextSlide();
+        startAutoplay();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        stopAutoplay();
+        prevSlide();
+        startAutoplay();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          stopAutoplay();
+          goToSlide(index);
+          startAutoplay();
+        });
+      });
+
+      //~~~~~ JAVASCRIPT 03: SWIPE/TOUCH SUPPORT~~~~~//
+      let touchStartX = 0;
+      let touchEndX = 0;
+      track.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+          stopAutoplay();
+        },
+        { passive: true },
+      );
+      track.addEventListener(
+        "touchend",
+        (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+          startAutoplay();
+        },
+        { passive: true },
+      );
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            revSlide();
+          }
+        }
+      }
+      //~~~~~ JAVASCRIPT 04: AUTPPLAY & HOVER CONTROL~~~~~//
+      startAutoplay();
+      track.addEventListener("mouseenter", stopAutoplay);
+      track.addEventListener("mouseleave", startAutoplay);
+    });
+
+    //~~~~~ JAVASCRIPT 05: SCROLL ANIMATION~~~~~//
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document
+      .querySelectorAll(".section-header, .category-card, .promo-card")
+      .forEach((el) => {
+        el.style.opacity = "0";
+        observer.observe(el);
+      });
+
+    //~~~~~ JAVASCRIPT 06: DROPDOWN ABOUT~~~~~//
+    function toggleAbout() {
+      const dropdown = document.getElementById("about-dropdown");
+      dropdown.classList.toggle("show");
+      dropdown.classList.toggle("hidden");
+    }
+    window.onclick = function (event) {
+      if (!event.target.matches(".about-trigger")) {
+        const dropdowns = document.getElementsByClassName("about-menu");
+        for (let i = 0; i < dropdowns.length; i++) {
+          let openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains("show")) {
+            openDropdown.classList.remove("show");
+            openDropdown.classList.add("hidden");
+          }
+        }
+      }
+    };
+
+    //~~~~~ JAVASCRIPT 07: MODAL OVERLAY~~~~~//
+    const modal = document.getElementById("productModal");
+
+    function openModal(img, title, price, desc) {
+      document.getElementById("modalImg").src = img;
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalPrice").innerText = price;
+      document.getElementById("modalDesc").innerText = desc;
+
+      modal.style.display = "block";
+
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+
+      document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+
+</html>

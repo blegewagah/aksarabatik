@@ -1,0 +1,1509 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backstory — Aksara Batik</title>
+
+  <!-- Fonts — IDENTIK dengan Home -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+           CSS VARIABLES — IDENTIK DENGAN HOME (tidak ada yang berubah)
+        ============================================================ */
+    :root {
+      --primary-burgundy: #5d3a3a;
+      --accent-pink: #f3d1d1;
+      --bg-cream: #fdfbf8;
+      --text-dark: #333333;
+      --text-light: #fdfbf8;
+      --olive-green: #6b7a68;
+      --font-heading: "Playfair Display", serif;
+      --font-body: "Lato", sans-serif;
+
+      /* Tambahan earth-tone untuk konten Backstory */
+      --terracotta: #c17a5a;
+      --sand: #d4b896;
+      --sand-light: #ead9c4;
+      --cream-dark: #f5efe6;
+      --brown-mid: #6b4226;
+      --brown-deep: #3b2217;
+    }
+
+    /* ============================================================
+           RESET & BASE — IDENTIK DENGAN HOME
+        ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    /* ============================================================
+           HEADER & NAV — IDENTIK PIXEL-PERFECT DENGAN HOME
+        ============================================================ */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 15px 0;
+      background-color: rgba(253, 251, 248, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(166, 145, 122, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: #a6917a;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: var(--primary-burgundy);
+      transition: var(--transition);
+    }
+
+    .dropdown-container {
+      position: relative;
+    }
+
+    .about-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--primary-burgundy);
+      list-style: none;
+      border-radius: 12px !important;
+      overflow: hidden;
+      margin-top: 8px;
+      min-width: 170px;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .about-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .about-menu li {
+      text-align: left !important;
+    }
+
+    .about-menu li a {
+      display: block;
+      padding: 14px 22px;
+      text-align: left !important;
+      /* ⬅️ paksa kiri */
+      justify-content: flex-start !important;
+      color: white;
+    }
+
+    /* ============================================================
+           FADE-IN ON SCROLL — UTILITY
+        ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.75s ease,
+        transform 0.75s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up.delay-1 {
+      transition-delay: 0.12s;
+    }
+
+    .fade-up.delay-2 {
+      transition-delay: 0.24s;
+    }
+
+    .fade-up.delay-3 {
+      transition-delay: 0.36s;
+    }
+
+    .fade-up.delay-4 {
+      transition-delay: 0.5s;
+    }
+
+    /* ============================================================
+           KAWUNG DIVIDER
+        ============================================================ */
+    .kawung-divider {
+      width: 100%;
+      height: 36px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='36' viewBox='0 0 60 36'%3E%3Cellipse cx='15' cy='18' rx='12' ry='7' fill='none' stroke='%23C17A5A' stroke-width='0.8' opacity='0.3'/%3E%3Cellipse cx='45' cy='18' rx='12' ry='7' fill='none' stroke='%23C17A5A' stroke-width='0.8' opacity='0.3'/%3E%3Cellipse cx='30' cy='7' rx='7' ry='4.5' fill='none' stroke='%235D3A3A' stroke-width='0.6' opacity='0.2'/%3E%3Cellipse cx='30' cy='29' rx='7' ry='4.5' fill='none' stroke='%235D3A3A' stroke-width='0.6' opacity='0.2'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 60px 36px;
+    }
+
+    /* ============================================================
+           1. HERO
+        ============================================================ */
+    .bs-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 580px;
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bs-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(135deg,
+          rgba(93, 58, 58, 0.7) 0%,
+          rgba(59, 34, 23, 0.5) 45%,
+          rgba(193, 122, 90, 0.38) 100%),
+        url("https://images.unsplash.com/photo-1583391099995-47c31484f6d2?w=1600&q=80");
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.06);
+      animation: heroZoom 14s ease forwards;
+    }
+
+    @keyframes heroZoom {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .bs-hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='22' fill='none' stroke='rgba(253,251,248,0.055)' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='12' fill='none' stroke='rgba(253,251,248,0.045)' stroke-width='1'/%3E%3Ccircle cx='0' cy='0' r='22' fill='none' stroke='rgba(253,251,248,0.035)' stroke-width='1'/%3E%3Ccircle cx='100' cy='0' r='22' fill='none' stroke='rgba(253,251,248,0.035)' stroke-width='1'/%3E%3Ccircle cx='0' cy='100' r='22' fill='none' stroke='rgba(253,251,248,0.035)' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='22' fill='none' stroke='rgba(253,251,248,0.035)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 100px 100px;
+    }
+
+    .bs-hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--text-light);
+      padding: 0 20px;
+      max-width: 720px;
+      animation: heroFade 1.4s ease both;
+    }
+
+    @keyframes heroFade {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bs-hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4.5px;
+      text-transform: uppercase;
+      color: var(--sand);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .bs-hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .bs-hero-title em {
+      font-style: italic;
+      color: var(--sand);
+    }
+
+    .bs-hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(253, 251, 248, 0.8);
+      max-width: 460px;
+      margin: 0 auto 36px;
+      line-height: 1.85;
+    }
+
+    .bs-scroll-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--sand);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      animation: bounce 2.2s ease infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(7px);
+      }
+    }
+
+    .bs-scroll-btn svg {
+      width: 18px;
+      stroke: var(--sand);
+      fill: none;
+    }
+
+    /* ============================================================
+           2. FOUNDER'S VISION
+        ============================================================ */
+    .founder-section {
+      background-color: var(--bg-cream);
+    }
+
+    .founder-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .founder-img-wrap {
+      position: relative;
+    }
+
+    .founder-img-frame {
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+
+    .founder-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .founder-img-frame:hover img {
+      transform: scale(1.04);
+    }
+
+    .founder-img-frame::before {
+      content: "";
+      position: absolute;
+      inset: -12px -12px 12px 12px;
+      border: 2px solid var(--terracotta);
+      border-radius: 3px;
+      z-index: -1;
+      opacity: 0.4;
+    }
+
+    .batik-stamp {
+      position: absolute;
+      bottom: -18px;
+      right: -18px;
+      width: 72px;
+      height: 72px;
+      background: var(--primary-burgundy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .batik-stamp svg {
+      width: 42px;
+      height: 42px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .section-title-bs {
+      font-family: var(--font-heading);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--primary-burgundy);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .blockquote {
+      position: relative;
+      padding: 2rem 2.4rem;
+      background: var(--cream-dark);
+      border-left: 3px solid var(--terracotta);
+      border-radius: 0 3px 3px 0;
+      margin: 24px 0;
+    }
+
+    .blockquote::before {
+      content: "\201C";
+      position: absolute;
+      top: -14px;
+      left: 16px;
+      font-family: var(--font-heading);
+      font-size: 6rem;
+      line-height: 1;
+      color: var(--terracotta);
+      opacity: 0.15;
+    }
+
+    .blockquote p {
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--primary-burgundy);
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .blockquote cite {
+      display: block;
+      margin-top: 14px;
+      font-size: 11px;
+      font-style: normal;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 700;
+    }
+
+    .blockquote cite::before {
+      content: "— ";
+    }
+
+    .section-body-bs {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--brown-mid);
+      line-height: 1.9;
+      max-width: 520px;
+    }
+
+    /* ============================================================
+           3. TIMELINE
+        ============================================================ */
+    .timeline-section {
+      background-color: var(--cream-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.06'/%3E%3Ccircle cx='30' cy='30' r='7' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.05'/%3E%3Ccircle cx='0' cy='0' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.04'/%3E%3Ccircle cx='60' cy='0' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.04'/%3E%3Ccircle cx='0' cy='60' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.04'/%3E%3Ccircle cx='60' cy='60' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .timeline-inner-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .tl-spine {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(to bottom,
+          transparent,
+          var(--terracotta) 8%,
+          var(--terracotta) 92%,
+          transparent);
+      transform: translateX(-50%);
+      opacity: 0.35;
+    }
+
+    .tl-items {
+      position: relative;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 1fr 44px 1fr;
+      align-items: start;
+      margin-bottom: 52px;
+    }
+
+    .tl-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-item.right .tl-left {
+      order: 3;
+    }
+
+    .tl-item.right .tl-mid {
+      order: 2;
+    }
+
+    .tl-item.right .tl-right {
+      order: 1;
+      text-align: right;
+    }
+
+    .tl-left,
+    .tl-right {
+      padding: 0 28px;
+    }
+
+    .tl-mid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 4px;
+    }
+
+    .tl-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--bg-cream);
+      border: 2.5px solid var(--terracotta);
+      flex-shrink: 0;
+      transition:
+        background 0.3s,
+        transform 0.3s;
+    }
+
+    .tl-item:hover .tl-dot {
+      background: var(--terracotta);
+      transform: scale(1.35);
+    }
+
+    .tl-year {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      opacity: 0.22;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .tl-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary-burgundy);
+      margin-bottom: 8px;
+    }
+
+    .tl-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--brown-mid);
+      line-height: 1.85;
+    }
+
+    /* ============================================================
+           4. THE CRAFTSMANSHIP
+        ============================================================ */
+    .craft-section {
+      background-color: var(--bg-cream);
+    }
+
+    .craft-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .craft-step {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .craft-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .craft-step.reversed {
+      direction: rtl;
+    }
+
+    .craft-step.reversed>* {
+      direction: ltr;
+    }
+
+    .craft-img-wrap {
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+
+    .craft-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .craft-img-wrap:hover img {
+      transform: scale(1.05);
+    }
+
+    .craft-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 40px;
+      height: 40px;
+      background: rgba(93, 58, 58, 0.82);
+      backdrop-filter: blur(6px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .craft-step-num {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--olive-green);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .craft-step-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      color: var(--primary-burgundy);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .craft-step-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--brown-mid);
+      line-height: 1.95;
+    }
+
+    /* ============================================================
+           5. VALUES — pakai --primary-burgundy dari Home
+        ============================================================ */
+    .values-section {
+      background-color: var(--primary-burgundy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .values-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cpath d='M22 45 Q45 18 68 45 Q45 72 22 45Z' fill='none' stroke='rgba(253,251,248,0.055)' stroke-width='1'/%3E%3Cpath d='M45 22 Q72 45 45 68 Q18 45 45 22Z' fill='none' stroke='rgba(253,251,248,0.045)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 90px 90px;
+      pointer-events: none;
+    }
+
+    .values-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .values-header .section-label {
+      color: var(--sand);
+    }
+
+    .values-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .value-card {
+      background: rgba(253, 251, 248, 0.07);
+      border: 1px solid rgba(253, 251, 248, 0.12);
+      border-radius: 3px;
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      transition:
+        background 0.3s,
+        transform 0.3s;
+    }
+
+    .value-card:hover {
+      background: rgba(253, 251, 248, 0.13);
+      transform: translateY(-6px);
+    }
+
+    .value-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 18px;
+    }
+
+    .value-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--sand);
+      fill: none;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .value-name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .value-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(253, 251, 248, 0.65);
+      line-height: 1.8;
+    }
+
+    /* ============================================================
+           6. CTA BAND
+        ============================================================ */
+    .cta-band {
+      background-color: var(--sand-light);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='40' rx='22' ry='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.07'/%3E%3Cellipse cx='40' cy='40' rx='12' ry='8' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.06'/%3E%3C/svg%3E");
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--primary-burgundy);
+      margin-bottom: 14px;
+    }
+
+    .cta-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--brown-mid);
+      margin-bottom: 36px;
+      line-height: 1.85;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary-burgundy);
+      color: var(--text-light);
+      border-color: var(--primary-burgundy);
+    }
+
+    .btn-primary:hover {
+      background: var(--brown-deep);
+      border-color: var(--brown-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(93, 58, 58, 0.28);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-burgundy);
+      border-color: var(--primary-burgundy);
+      margin-left: 12px;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-burgundy);
+      color: var(--text-light);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+           FOOTER — IDENTIK DENGAN HOME
+        ============================================================ */
+    footer {
+      background-color: var(--bg-cream);
+      padding: 80px 0 40px 0;
+      border-top: 1px solid #E5E1DA;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      color: var(--primary-burgundy);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: #666;
+      max-width: 300px;
+      line-height: 1.8;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--primary-burgundy);
+      margin-bottom: 25px;
+      border-bottom: 1px solid #D4C3C3;
+      display: inline-block;
+    }
+
+    .footer-links {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #555;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-burgundy);
+    }
+
+    .footer-contact {
+      font-size: 14px;
+      color: #555;
+      line-height: 2;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #EEE;
+      padding-top: 30px;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+    @media (max-width: 992px) {
+      .founder-inner {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid>div:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .craft-step,
+      .craft-step.reversed {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 28px;
+      }
+
+      .tl-spine {
+        display: none;
+      }
+
+      .tl-item {
+        grid-template-columns: 14px 1fr;
+      }
+
+      .tl-item .tl-left {
+        display: none;
+      }
+
+      .tl-item.right .tl-right {
+        order: unset;
+        text-align: left;
+      }
+
+      .tl-item.right .tl-left {
+        order: unset;
+        display: none;
+      }
+
+      .tl-item.right .tl-mid {
+        order: unset;
+      }
+
+      .tl-left,
+      .tl-right {
+        padding: 0 16px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ================================================================
+         HEADER — IDENTIK DENGAN HOME
+         Class: .logo, .nav-container, .nav-links, .dropdown-container,
+                .about-menu, .hidden/.show
+         JS: toggleAbout(), window.onclick — copy-paste identik
+    ================================================================ -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">AB</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li class="dropdown-container">
+          <a href="javascript:void(0)" class="about-trigger" onclick="toggleAbout()">About</a>
+          <ul id="about-dropdown" class="about-menu hidden">
+            <li><a href="profile.html">Profile</a></li>
+            <li>
+              <a href="backstory.html" class="active-link">Backstory</a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="index.html#explores">Explores</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ================================================================
+         1. HERO
+    ================================================================ -->
+  <section class="bs-hero">
+    <div class="bs-hero-bg"></div>
+    <div class="bs-hero-content">
+      <p class="bs-hero-eyebrow">Aksara Batik · Backstory</p>
+      <h1 class="bs-hero-title">Cerita di Balik<br /><em>Aksara</em></h1>
+      <p class="bs-hero-sub">
+        Setiap helai kain menyimpan doa, setiap motif merangkai ingatan. Ini
+        adalah perjalanan kami.
+      </p>
+      <button class="bs-scroll-btn" onclick="
+            document
+              .getElementById('founder')
+              .scrollIntoView({ behavior: 'smooth' })
+          ">
+        <svg viewBox="0 0 24 24" stroke-width="1.5">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <polyline points="19 12 12 19 5 12" />
+        </svg>
+        Gulir ke Bawah
+      </button>
+    </div>
+  </section>
+
+  <div class="kawung-divider"></div>
+
+  <!-- ================================================================
+         2. FOUNDER'S VISION
+    ================================================================ -->
+  <section id="founder" class="founder-section">
+    <div class="container">
+      <div class="founder-inner">
+        <div class="founder-img-wrap fade-up">
+          <div class="founder-img-frame">
+            <!-- GANTI src dengan foto founder kamu, misal: src="foto-founder.jpg" -->
+            <img src="foto shafa.jpeg" alt="Founder Aksara Batik" loading="lazy" />
+          </div>
+          <div class="batik-stamp">
+            <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="23" cy="11" rx="8" ry="5" stroke="#FDFBF8" stroke-width="1.2" opacity="0.85" />
+              <ellipse cx="23" cy="35" rx="8" ry="5" stroke="#FDFBF8" stroke-width="1.2" opacity="0.85" />
+              <ellipse cx="11" cy="23" rx="5" ry="8" stroke="#FDFBF8" stroke-width="1.2" opacity="0.85" />
+              <ellipse cx="35" cy="23" rx="5" ry="8" stroke="#FDFBF8" stroke-width="1.2" opacity="0.85" />
+              <circle cx="23" cy="23" r="4" stroke="#EAD9C4" stroke-width="1.2" opacity="0.75" />
+            </svg>
+          </div>
+        </div>
+
+        <div>
+          <p class="section-label fade-up">Visi Pendiri</p>
+          <h2 class="section-title-bs fade-up delay-1">
+            Dari Lembar Kain<br />Lahirlah Sebuah Suara
+          </h2>
+
+          <blockquote class="blockquote fade-up delay-2">
+            <p>
+              Batik bukan sekadar kain — ia adalah aksara yang ditulis oleh
+              tangan, didoakan oleh jiwa, dan diwariskan oleh waktu. Saya
+              membangun Aksara Batik agar generasi baru bisa membaca cerita
+              itu dengan bangga.
+            </p>
+            <cite>Shaffanah Rafa Kamila, Founder &amp; Creative Director</cite>
+          </blockquote>
+
+          <p class="section-body-bs fade-up delay-3">
+            Berawal dari kecintaan pada warisan nenek dalam sebuah rumah kecil
+            di Laweyan, Shaffanah Rafa Kamila memutuskan bahwa kain batik
+            harus bertemu dunia modern — tanpa kehilangan rohnya. Ia percaya
+            bahwa identitas lokal adalah kekuatan, bukan keterbatasan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kawung-divider"></div>
+
+  <!-- ================================================================
+         3. TIMELINE
+    ================================================================ -->
+  <section id="timeline" class="timeline-section">
+    <div class="container">
+      <div class="timeline-header fade-up">
+        <p class="section-label">Perjalanan Kami</p>
+        <h2 class="section-title-bs">Garis Waktu Aksara</h2>
+        <p style="
+              font-size: 14px;
+              font-weight: 300;
+              color: var(--brown-mid);
+              max-width: 500px;
+              margin: 14px auto 0;
+              text-align: center;
+              line-height: 1.85;
+            ">
+          Dari sebuah sketsa di buku tulis lama, hingga label yang dikenal di
+          panggung mode Nusantara.
+        </p>
+      </div>
+
+      <div class="timeline-inner-wrap">
+        <div class="tl-spine"></div>
+        <div class="tl-items">
+          <div class="tl-item fade-up">
+            <div class="tl-left">
+              <div class="tl-year">2018</div>
+              <div class="tl-title">Sketsa Pertama</div>
+              <div class="tl-desc">
+                Di sudut kamar kos Jogja, Shaffanah menggambar ulang motif
+                parang milik neneknya — menambahkan garis modern yang tipis
+                namun tegas di atas kertas usang.
+              </div>
+            </div>
+            <div class="tl-mid">
+              <div class="tl-dot"></div>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="tl-item right fade-up delay-1">
+            <div class="tl-left"></div>
+            <div class="tl-mid">
+              <div class="tl-dot"></div>
+            </div>
+            <div class="tl-right">
+              <div class="tl-year">2019</div>
+              <div class="tl-title">Workshop Pertama</div>
+              <div class="tl-desc">
+                Kolaborasi dengan tiga pengrajin batik tulis dari Pekalongan
+                menghasilkan koleksi kapsul perdana: 12 lembar, habis terjual
+                dalam 3 hari.
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item fade-up delay-2">
+            <div class="tl-left">
+              <div class="tl-year">2021</div>
+              <div class="tl-title">Brand Resmi &amp; Toko Online</div>
+              <div class="tl-desc">
+                Aksara Batik resmi berdiri. Website diluncurkan di tengah
+                pandemi — dan orang-orang ternyata rindu akan sesuatu yang
+                nyata dan bermakna.
+              </div>
+            </div>
+            <div class="tl-mid">
+              <div class="tl-dot"></div>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="tl-item right fade-up delay-3">
+            <div class="tl-left"></div>
+            <div class="tl-mid">
+              <div class="tl-dot"></div>
+            </div>
+            <div class="tl-right">
+              <div class="tl-year">2023</div>
+              <div class="tl-title">Debut Jakarta Fashion Week</div>
+              <div class="tl-desc">
+                Koleksi "Akar &amp; Awan" di JFW — memadukan tenun ikat dan
+                batik tulis dalam siluet kontemporer yang mendapat sambutan
+                luar biasa.
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item fade-up delay-4">
+            <div class="tl-left">
+              <div class="tl-year">2025</div>
+              <div class="tl-title">Aksara Goes Global</div>
+              <div class="tl-desc">
+                Flagship store pertama di Jakarta Selatan. Program residensi
+                pengrajin. Dan percakapan hangat dengan buyers dari Singapura,
+                Tokyo, dan Amsterdam.
+              </div>
+            </div>
+            <div class="tl-mid">
+              <div class="tl-dot"></div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kawung-divider"></div>
+
+  <!-- ================================================================
+         4. THE CRAFTSMANSHIP
+    ================================================================ -->
+  <section id="craft" class="craft-section">
+    <div class="container">
+      <div class="craft-header fade-up">
+        <p class="section-label">Proses Pembuatan</p>
+        <h2 class="section-title-bs">Dari Malam hingga Makna</h2>
+        <p style="
+              font-size: 14px;
+              font-weight: 300;
+              color: var(--brown-mid);
+              max-width: 500px;
+              margin: 14px auto 0;
+              text-align: center;
+              line-height: 1.85;
+            ">
+          Batik tulis sejati membutuhkan kesabaran, presisi, dan cinta. Inilah
+          perjalanan selembar kain sebelum menyentuh kulitmu.
+        </p>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="craft-step fade-up">
+        <div class="craft-img-wrap">
+          <!-- GANTI src dengan foto proses kamu. Contoh: src="proses-pola.jpg" -->
+          <img src="pemolaan.jpg.jpeg" alt="Pemolaan Desain" loading="lazy" />
+          <div class="craft-badge">1</div>
+        </div>
+        <div>
+          <p class="craft-step-num">Langkah Pertama</p>
+          <h3 class="craft-step-title">Pemolaan &amp; Desain Motif</h3>
+          <p class="craft-step-desc">
+            Setiap kain diawali dengan sketsa tangan di atas kertas minyak.
+            Motif dipilih dengan hati-hati — mempertimbangkan makna filosofis
+            dan keserasian estetika modern. Desain kemudian dipindahkan ke
+            kain mori menggunakan pensil khusus yang mudah hilang saat dicuci.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 2 reversed -->
+      <div class="craft-step reversed fade-up">
+        <div class="craft-img-wrap">
+          <!-- GANTI: src="proses-canting.jpg" -->
+          <img src="canting.jpg.jpeg" alt="Membatik dengan Canting" loading="lazy" />
+          <div class="craft-badge">2</div>
+        </div>
+        <div>
+          <p class="craft-step-num">Langkah Kedua</p>
+          <h3 class="craft-step-title">
+            Membatik dengan Canting &amp; Malam
+          </h3>
+          <p class="craft-step-desc">
+            Lilin panas (malam) dituangkan ke dalam canting — alat kecil
+            berujung tembaga. Sang pengrajin menulis setiap garis dengan
+            sabar, menutup bagian kain agar tidak terkena warna. Satu lembar
+            kain bisa membutuhkan berminggu-minggu pekerjaan tangan yang
+            teliti.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="craft-step fade-up">
+        <div class="craft-img-wrap">
+          <!-- GANTI: src="proses-pewarna.jpg" -->
+          <img src="pewarnaan.jpg.jpeg" Pewarnaan Alami" loading="lazy" />
+          <div class="craft-badge">3</div>
+        </div>
+        <div>
+          <p class="craft-step-num">Langkah Ketiga</p>
+          <h3 class="craft-step-title">Pewarnaan Alami &amp; Fiksasi</h3>
+          <p class="craft-step-desc">
+            Aksara Batik memprioritaskan pewarna alami — indigo dari tanaman
+            indigofera, sogan dari kulit kayu mahoni, dan merah dari akar
+            mengkudu. Kain dicelupkan berulang kali untuk kedalaman warna yang
+            kaya, lalu difiksasi dengan tawas atau kapur alami.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4 reversed -->
+      <div class="craft-step reversed fade-up">
+        <div class="craft-img-wrap">
+          <!-- GANTI: src="proses-finishing.jpg" -->
+          <img src="pelorodan.jpg.jpeg" alt="Pelorodan dan Finishing" loading="lazy" />
+          <div class="craft-badge">4</div>
+        </div>
+        <div>
+          <p class="craft-step-num">Langkah Keempat</p>
+          <h3 class="craft-step-title">Pelorodan &amp; Sentuhan Akhir</h3>
+          <p class="craft-step-desc">
+            Malam dilepaskan dalam air mendidih melalui proses "nglorod". Kain
+            dicuci bersih, dikeringkan di bawah sinar matahari, lalu disetrika
+            dengan telaten. Setiap lembar melewati quality check individual
+            sebelum siap berpindah tangan kepada pemiliknya yang baru.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+         5. VALUES
+    ================================================================ -->
+  <section class="values-section">
+    <div class="container">
+      <div class="values-header fade-up">
+        <p class="section-label">Apa yang Kami Jaga</p>
+        <h2>Tiga Pilar Aksara</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card fade-up">
+          <div class="value-icon">
+            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+              <path d="M25 8 C18 8, 8 16, 8 26 C8 36, 18 44, 25 44 C32 44, 42 36, 42 26 C42 16, 32 8, 25 8Z" />
+              <path d="M25 16 L25 34 M16 25 L34 25" />
+            </svg>
+          </div>
+          <h3 class="value-name">Warisan (Heritage)</h3>
+          <p class="value-desc">
+            Setiap koleksi berakar dari riset mendalam akan motif-motif batik
+            Nusantara — agar makna tidak pernah hilang dalam terjemahan
+            modern.
+          </p>
+        </div>
+
+        <div class="value-card fade-up delay-1">
+          <div class="value-icon">
+            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="25" cy="25" r="16" />
+              <circle cx="25" cy="25" r="8" />
+              <circle cx="25" cy="25" r="3" />
+            </svg>
+          </div>
+          <h3 class="value-name">Ketulusan (Integrity)</h3>
+          <p class="value-desc">
+            Tidak ada scarcity palsu, tidak ada fast-fashion. Setiap helai
+            dibuat dengan sungguh-sungguh oleh tangan yang benar-benar peduli.
+          </p>
+        </div>
+
+        <div class="value-card fade-up delay-2">
+          <div class="value-icon">
+            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 38 L25 12 L38 38Z" />
+              <path d="M18 28 L32 28" />
+              <circle cx="25" cy="12" r="2.5" />
+            </svg>
+          </div>
+          <h3 class="value-name">Keberlanjutan (Sustainability)</h3>
+          <p class="value-desc">
+            Pewarna alami, kemasan daur ulang, dan upah pengrajin yang adil.
+            Keindahan sejati tidak boleh mengorbankan bumi maupun manusianya.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+         6. CTA BAND
+    ================================================================ -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner fade-up">
+        <p class="section-label">Mulai Perjalananmu</p>
+        <h2 class="cta-title">Temukan Kain yang Berbicara Kepadamu</h2>
+        <p class="cta-desc">
+          Setiap koleksi Aksara Batik adalah undangan untuk menjadi bagian
+          dari cerita yang lebih panjang — tentang identitas, keindahan, dan
+          keberanian untuk berbeda.
+        </p>
+        <div>
+          <a href="explore.html" class="btn btn-primary">Jelajahi Koleksi</a>
+          <a href="contact.html" class="btn btn-outline">Hubungi Kami</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+         FOOTER — IDENTIK DENGAN HOME
+         Struktur grid 1.5fr 1fr 1fr, warna, font, semua sama
+    ================================================================ -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div>
+          <span class="footer-logo">AB</span>
+          <p class="footer-tagline">Menghadirkan keindahan warisan budaya Indonesia melalui desain batik modern yang
+            elegan untuk gaya hidup masa kini.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="profile.html">Tentang Kami</a></li>
+            <li><a href="explore.html">Koleksi</a></li>
+            <li><a href="backstory.html">Backstory</a></li>
+            <li><a href="contact.html">Hubungi Kami</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Get in Touch</h4>
+          <div class="footer-contact">
+            <p>📍 Jl. Raya ITS No. 123, Surabaya</p>
+            <p>📞 +62 821-4071-4633</p>
+            <p>✉️ aksarabatik.ofc@gmail.com</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 AKSARA BATIK. INDONESIAN HERITAGE REIMAGINED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================
+         JAVASCRIPT — IDENTIK DENGAN HOME
+         toggleAbout() dan window.onclick copy-paste persis sama
+    ================================================================ -->
+  <script>
+    /* --- Dropdown — IDENTIK dengan Home --- */
+    function toggleAbout() {
+      const dropdown = document.getElementById("about-dropdown");
+      dropdown.classList.toggle("show");
+      dropdown.classList.toggle("hidden");
+    }
+
+    window.onclick = function (event) {
+      if (!event.target.matches(".about-trigger")) {
+        const dropdowns = document.getElementsByClassName("about-menu");
+        for (let i = 0; i < dropdowns.length; i++) {
+          let openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains("show")) {
+            openDropdown.classList.remove("show");
+            openDropdown.classList.add("hidden");
+          }
+        }
+      }
+    };
+
+    /* --- Scroll fade-in observer --- */
+    const fadeEls = document.querySelectorAll(".fade-up");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.11 },
+    );
+
+    fadeEls.forEach((el) => observer.observe(el));
+  </script>
+</body>
+
+</html>

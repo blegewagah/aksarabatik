@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile — Aksara Batik</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           CSS VARIABLES — IDENTIK DENGAN HOME & BACKSTORY
+        ============================================================ */
+        :root {
+            --primary-burgundy: #5D3A3A;
+            --accent-pink: #F3D1D1;
+            --bg-cream: #FDFBF8;
+            --text-dark: #333333;
+            --text-light: #FDFBF8;
+            --olive-green: #6B7A68;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+
+            /* Earth-tone tambahan (selaras dengan Backstory) */
+            --terracotta: #C17A5A;
+            --sand: #D4B896;
+            --sand-light: #EAD9C4;
+            --cream-dark: #F5EFE6;
+            --brown-mid: #6B4226;
+            --brown-deep: #3B2217;
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* ============================================================
+           HEADER & NAV — IDENTIK PIXEL-PERFECT DENGAN HOME
+        ============================================================ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            background-color: rgba(253, 251, 248, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(166, 145, 122, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: #a6917a;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary-burgundy);
+            transition: var(--transition);
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .about-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--primary-burgundy);
+            list-style: none;
+            border-radius: 12px !important;
+            overflow: hidden;
+            margin-top: 8px;
+            min-width: 170px;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .about-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .about-menu li {
+            text-align: left !important;
+        }
+
+        .about-menu li a {
+            display: block;
+            padding: 12px 22px;
+            text-align: left !important;
+            /* ⬅️ paksa kiri */
+            justify-content: flex-start !important;
+            color: white;
+        }
+
+        /* ============================================================
+           REVEAL ON SCROLL — class .reveal (sesuai instruksi)
+        ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal.delay-1 {
+            transition-delay: 0.12s;
+        }
+
+        .reveal.delay-2 {
+            transition-delay: 0.24s;
+        }
+
+        .reveal.delay-3 {
+            transition-delay: 0.36s;
+        }
+
+        .reveal.delay-4 {
+            transition-delay: 0.5s;
+        }
+
+        /* ============================================================
+           KAWUNG DIVIDER — konsisten dengan Backstory
+        ============================================================ */
+        .kawung-divider {
+            width: 100%;
+            height: 36px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='36' viewBox='0 0 60 36'%3E%3Cellipse cx='15' cy='18' rx='12' ry='7' fill='none' stroke='%23C17A5A' stroke-width='0.8' opacity='0.3'/%3E%3Cellipse cx='45' cy='18' rx='12' ry='7' fill='none' stroke='%23C17A5A' stroke-width='0.8' opacity='0.3'/%3E%3Cellipse cx='30' cy='7' rx='7' ry='4.5' fill='none' stroke='%235D3A3A' stroke-width='0.6' opacity='0.2'/%3E%3Cellipse cx='30' cy='29' rx='7' ry='4.5' fill='none' stroke='%235D3A3A' stroke-width='0.6' opacity='0.2'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 60px 36px;
+        }
+
+        /* ============================================================
+           1. HERO SECTION
+        ============================================================ */
+        .profile-hero {
+            position: relative;
+            height: 65vh;
+            min-height: 460px;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--cream-dark);
+        }
+
+        /* Batik pattern background SVG */
+        .profile-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(135deg,
+                    rgba(93, 58, 58, 0.06) 0%,
+                    rgba(107, 122, 104, 0.08) 50%,
+                    rgba(193, 122, 90, 0.06) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cellipse cx='60' cy='30' rx='18' ry='11' fill='none' stroke='%235D3A3A' stroke-width='0.7' opacity='0.09'/%3E%3Cellipse cx='60' cy='90' rx='18' ry='11' fill='none' stroke='%235D3A3A' stroke-width='0.7' opacity='0.09'/%3E%3Cellipse cx='30' cy='60' rx='11' ry='18' fill='none' stroke='%235D3A3A' stroke-width='0.7' opacity='0.09'/%3E%3Cellipse cx='90' cy='60' rx='11' ry='18' fill='none' stroke='%235D3A3A' stroke-width='0.7' opacity='0.09'/%3E%3Ccircle cx='60' cy='60' r='10' fill='none' stroke='%23C17A5A' stroke-width='0.6' opacity='0.08'/%3E%3Ccircle cx='0' cy='0' r='18' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.06'/%3E%3Ccircle cx='120' cy='0' r='18' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.06'/%3E%3Ccircle cx='0' cy='120' r='18' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.06'/%3E%3Ccircle cx='120' cy='120' r='18' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.06'/%3E%3C/svg%3E");
+            background-size: 120px 120px;
+        }
+
+        /* Dekoratif garis diagonal */
+        .profile-hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(193, 122, 90, 0.12);
+            border-radius: 50%;
+        }
+
+        .profile-hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(93, 58, 58, 0.08);
+            border-radius: 50%;
+        }
+
+        .profile-hero-content {
+            position: relative;
+            text-align: center;
+            padding: 0 20px;
+            animation: heroFadeIn 1.2s ease both;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            letter-spacing: 4.5px;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.6rem, 7vw, 5.2rem);
+            font-weight: 700;
+            color: var(--primary-burgundy);
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--brown-mid);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.85;
+        }
+
+        /* Dekorasi garis bawah judul */
+        .hero-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 24px auto 0;
+        }
+
+        .hero-ornament span {
+            display: block;
+            height: 1px;
+            width: 60px;
+            background: var(--terracotta);
+            opacity: 0.4;
+        }
+
+        .hero-ornament-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            opacity: 0.55;
+        }
+
+        /* ============================================================
+           2. VISION & MISSION
+        ============================================================ */
+        .vismis-section {
+            background-color: var(--primary-burgundy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Batik parang pattern overlay */
+        .vismis-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M20 40 Q40 10 60 40 Q40 70 20 40Z' fill='none' stroke='rgba(253,251,248,0.05)' stroke-width='1'/%3E%3Cpath d='M40 20 Q70 40 40 60 Q10 40 40 20Z' fill='none' stroke='rgba(253,251,248,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        .vismis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 0;
+            align-items: start;
+        }
+
+        .vismis-divider {
+            background: rgba(253, 251, 248, 0.15);
+            height: 100%;
+            min-height: 200px;
+            margin: 0 40px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--sand);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .vismis-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .vismis-title em {
+            font-style: italic;
+            color: var(--sand);
+        }
+
+        .vismis-body {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(253, 251, 248, 0.72);
+            line-height: 1.95;
+            max-width: 460px;
+        }
+
+        .vismis-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+            padding: 8px 18px;
+            border: 1px solid rgba(212, 184, 150, 0.3);
+            border-radius: 2px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sand);
+            font-weight: 700;
+        }
+
+        .vismis-tag::before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 1px;
+            background: var(--sand);
+            opacity: 0.5;
+        }
+
+        /* ============================================================
+           3. FOUNDERS GRID
+        ============================================================ */
+        .founders-section {
+            background-color: var(--bg-cream);
+        }
+
+        .founders-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .founders-header .section-label {
+            color: var(--terracotta);
+        }
+
+        .section-title-p {
+            font-family: var(--font-heading);
+            font-size: clamp(1.9rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--primary-burgundy);
+            line-height: 1.2;
+        }
+
+        .section-title-p+p {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--brown-mid);
+            max-width: 500px;
+            margin: 14px auto 0;
+            text-align: center;
+            line-height: 1.85;
+        }
+
+        /* Founder Grid — 4 kolom di desktop */
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        /* Kartu founder */
+        .founder-card {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background-color: var(--cream-dark);
+            cursor: pointer;
+        }
+
+        /* ====================================================
+           INSTRUKSI FOTO:
+           Ganti "src" pada setiap <img> tag di dalam .founder-card
+           dengan path foto lokal kamu, contoh: src="foto-sari.jpeg"
+           Ada 4 founder, masing-masing ditandai dengan komentar
+           <!-- GANTI FOTO: ... -->
+        ==================================================== */
+        .founder-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Placeholder saat foto belum diisi */
+        .founder-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, var(--cream-dark) 0%, var(--sand-light) 100%);
+        }
+
+        .founder-placeholder svg {
+            width: 60px;
+            height: 60px;
+            stroke: var(--sand);
+            fill: none;
+            stroke-width: 1;
+            opacity: 0.5;
+        }
+
+        /* Overlay hover — muncul nama & jabatan */
+        .founder-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,
+                    rgba(59, 34, 23, 0.92) 0%,
+                    rgba(93, 58, 58, 0.55) 45%,
+                    transparent 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px 24px;
+            opacity: 0;
+            transition: opacity 0.42s ease;
+        }
+
+        .founder-card:hover .founder-overlay {
+            opacity: 1;
+        }
+
+        .founder-card:hover .founder-photo {
+            transform: scale(1.07);
+        }
+
+        .founder-name {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 4px;
+            transform: translateY(10px);
+            transition: transform 0.42s ease;
+        }
+
+        .founder-role {
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--sand);
+            font-weight: 700;
+            transform: translateY(10px);
+            transition: transform 0.42s ease 0.05s;
+        }
+
+        .founder-bio {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(253, 251, 248, 0.72);
+            line-height: 1.7;
+            margin-top: 8px;
+            transform: translateY(10px);
+            transition: transform 0.42s ease 0.1s;
+        }
+
+        .founder-card:hover .founder-name,
+        .founder-card:hover .founder-role,
+        .founder-card:hover .founder-bio {
+            transform: translateY(0);
+        }
+
+        /* Nomor dekoratif pojok kiri atas */
+        .founder-num {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-family: var(--font-heading);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-burgundy);
+            background: rgba(253, 251, 248, 0.88);
+            backdrop-filter: blur(4px);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            opacity: 0.85;
+        }
+
+        /* ============================================================
+           4. TEAM VALUES
+        ============================================================ */
+        .values-section {
+            background-color: var(--cream-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .values-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.05'/%3E%3Ccircle cx='30' cy='30' r='7' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.045'/%3E%3Ccircle cx='0' cy='0' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.035'/%3E%3Ccircle cx='60' cy='0' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.035'/%3E%3Ccircle cx='0' cy='60' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.035'/%3E%3Ccircle cx='60' cy='60' r='14' fill='none' stroke='%235D3A3A' stroke-width='0.5' opacity='0.035'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .values-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .values-header .section-label {
+            color: var(--terracotta);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .value-card {
+            background: var(--bg-cream);
+            border: 1px solid rgba(93, 58, 58, 0.08);
+            border-radius: 4px;
+            padding: 2.4rem 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(93, 58, 58, 0.1);
+        }
+
+        /* Ikon SVG minimalis per value */
+        .value-icon {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream-dark);
+            border-radius: 50%;
+            border: 1.5px solid rgba(193, 122, 90, 0.2);
+        }
+
+        .value-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--terracotta);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .value-name {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-burgundy);
+            margin-bottom: 10px;
+        }
+
+        .value-desc {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--brown-mid);
+            line-height: 1.85;
+        }
+
+        /* ============================================================
+           5. CLOSING QUOTE
+        ============================================================ */
+        .closing-section {
+            background-color: var(--bg-cream);
+            text-align: center;
+        }
+
+        .closing-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .closing-ornament-line {
+            height: 1px;
+            width: 80px;
+            background: linear-gradient(to right, transparent, var(--terracotta));
+            opacity: 0.35;
+        }
+
+        .closing-ornament-line.right {
+            background: linear-gradient(to left, transparent, var(--terracotta));
+        }
+
+        .closing-ornament svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--terracotta);
+            fill: none;
+            stroke-width: 1;
+            opacity: 0.55;
+        }
+
+        .closing-quote {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--primary-burgundy);
+            max-width: 760px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+
+        .closing-quote-attr {
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-weight: 700;
+        }
+
+        /* ============================================================
+           FOOTER — IDENTIK DENGAN HOME
+        ============================================================ */
+        footer {
+            background-color: var(--bg-cream);
+            padding: 80px 0 40px 0;
+            border-top: 1px solid #E5E1DA;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            color: var(--primary-burgundy);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: #666;
+            max-width: 300px;
+            line-height: 1.8;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            color: var(--primary-burgundy);
+            margin-bottom: 25px;
+            border-bottom: 1px solid #D4C3C3;
+            display: inline-block;
+        }
+
+        .footer-links {
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #555;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-burgundy);
+        }
+
+        .footer-contact {
+            font-size: 14px;
+            color: #555;
+            line-height: 2;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #EEE;
+            padding-top: 30px;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 1100px) {
+            .founders-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .vismis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vismis-divider {
+                display: none;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid>div:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .founders-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                max-width: 380px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .founders-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================================================
+         HEADER — IDENTIK DENGAN HOME & BACKSTORY
+    ================================================================ -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">AB</a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li class="dropdown-container">
+                    <a href="javascript:void(0)" class="about-trigger" onclick="toggleAbout()">About</a>
+                    <ul id="about-dropdown" class="about-menu hidden">
+                        <li><a href="profile.html" class="active-link">Profile</a></li>
+                        <li><a href="backstory.html">Backstory</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#explores">Explores</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+
+    <!-- ================================================================
+         1. HERO
+    ================================================================ -->
+    <section class="profile-hero">
+        <div class="profile-hero-bg"></div>
+        <div class="profile-hero-content">
+            <p class="hero-eyebrow">Aksara Batik · Profile</p>
+            <h1 class="hero-title">Mengenal <em>Mereka</em><br>di Balik Aksara</h1>
+            <p class="hero-sub">Sebuah tim kecil yang percaya bahwa budaya bukan beban masa lalu, melainkan bahan bakar
+                untuk masa depan.</p>
+            <div class="hero-ornament">
+                <span></span>
+                <div class="hero-ornament-dot"></div>
+                <div class="hero-ornament-dot"></div>
+                <div class="hero-ornament-dot"></div>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <div class="kawung-divider"></div>
+
+
+    <!-- ================================================================
+         2. VISION & MISSION
+    ================================================================ -->
+    <section class="vismis-section">
+        <div class="container">
+            <div class="vismis-grid">
+
+                <!-- VISI -->
+                <div class="reveal">
+                    <p class="section-label">Visi Kami</p>
+                    <h2 class="vismis-title">Menjadi Suara<br>Batik untuk <em>Dunia</em></h2>
+                    <p class="vismis-body">
+                        Kami bermimpi tentang dunia di mana kain batik bukan hanya dipakai di hari-hari formal, tetapi
+                        menjadi bagian hidup sehari-hari — dari pagi di kantor hingga sore di jalanan kota. Kami ingin
+                        batik dilihat sebagai karya agung yang hidup dan terus berkembang.
+                    </p>
+                    <div class="vismis-tag">Warisan yang Hidup</div>
+                </div>
+
+                <div class="vismis-divider"></div>
+
+                <!-- MISI -->
+                <div class="reveal delay-2">
+                    <p class="section-label">Misi Kami</p>
+                    <h2 class="vismis-title">Menjaga, Berinovasi,<br><em>Berbagi</em></h2>
+                    <p class="vismis-body">
+                        Kami berkomitmen untuk menjaga keaslian teknik batik tulis, berinovasi dalam siluet dan palet
+                        warna yang relevan dengan zaman, serta berbagi manfaat secara nyata kepada komunitas pengrajin.
+                        Setiap keputusan kreatif kami berakar dari tiga pertanyaan: <em
+                            style="color:var(--sand);">Apakah ini jujur? Apakah ini indah? Apakah ini bermakna?</em>
+                    </p>
+                    <div class="vismis-tag">Inovasi Berakar Budaya</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="kawung-divider"></div>
+
+
+    <!-- ================================================================
+         3. FOUNDERS GRID
+    ================================================================ -->
+    <section class="founders-section">
+        <div class="container">
+
+            <div class="founders-header reveal">
+                <p class="section-label">Orang-Orang di Balik Label</p>
+                <h2 class="section-title-p">Tim Pendiri Aksara Batik</h2>
+                <p>Empat individu dengan latar belakang berbeda, bersatu karena satu cinta yang sama: kain dan cerita di
+                    baliknya.</p>
+            </div>
+
+            <div class="founders-grid">
+
+                <!-- ====================================================
+                     FOUNDER 1 — GANTI FOTO:
+                     Ubah src="founder-1.jpeg" dengan nama file foto kamu
+                     Contoh: src="foto-sari.jpeg"
+                     Pastikan file berada di folder yang sama dengan profile.html
+                ==================================================== -->
+                <div class="founder-card reveal">
+                    <div class="founder-num">01</div>
+                    <!-- GANTI FOTO FOUNDER 1 DI BAWAH INI -->
+                    <div class="founder-placeholder">
+                        <img src="foto shafa.jpeg" alt="Shaffanah Rafa Kamila" class="founder-photo">
+                    </div>
+                    <div class="founder-overlay">
+                        <div class="founder-name">Shaffanah Rafa Kamila</div>
+                        <div class="founder-role">Founder &amp; Creative Director</div>
+                        <div class="founder-bio">Arsitek motif dan penjaga jiwa brand. Lahir di Laweyan, besar di antara
+                            bau malam dan cerita.</div>
+                    </div>
+                </div>
+
+                <!-- ====================================================
+                     FOUNDER 2 — GANTI FOTO:
+                     Ubah src menjadi nama file foto ke-2 kamu
+                     Contoh: src="foto-dian.jpeg"
+                ==================================================== -->
+                <div class="founder-card reveal delay-1">
+                    <div class="founder-num">02</div>
+                    <!-- GANTI FOTO FOUNDER 2 DI BAWAH INI -->
+                    <div class="founder-placeholder">
+                        <img src="foto almira.jpeg" alt="Almira Rahma Amany" class="founder-photo">
+                    </div>
+                    <div class="founder-overlay">
+                        <div class="founder-name">Almira Rahma Amany</div>
+                        <div class="founder-role">Lead Designer</div>
+                        <div class="founder-bio">Menterjemahkan motif tradisional ke dalam potongan modern dengan
+                            kepekaan estetika yang tajam.</div>
+                    </div>
+                </div>
+
+                <!-- ====================================================
+                     FOUNDER 3 — GANTI FOTO:
+                     Ubah src menjadi nama file foto ke-3 kamu
+                     Contoh: src="foto-reza.jpeg"
+                ==================================================== -->
+                <div class="founder-card reveal delay-2">
+                    <div class="founder-num">03</div>
+                    <!-- GANTI FOTO FOUNDER 3 DI BAWAH INI -->
+                    <div class="founder-placeholder">
+                        <img src="caroly foto.jpeg" alt="Caroly Sebastian Ranto" class="founder-photo">
+                    </div>
+                    <div class="founder-overlay">
+                        <div class="founder-name">Caroly Sebastian Ranto</div>
+                        <div class="founder-role">Head of Artisan Relations</div>
+                        <div class="founder-bio">Jembatan antara Aksara dan ratusan pengrajin di Pekalongan, Solo, dan
+                            Yogyakarta.</div>
+                    </div>
+                </div>
+
+                <!-- ====================================================
+                     FOUNDER 4 — GANTI FOTO:
+                     Ubah src menjadi nama file foto ke-4 kamu
+                     Contoh: src="foto-anisa.jpeg"
+                ==================================================== -->
+                <div class="founder-card reveal delay-3">
+                    <div class="founder-num">04</div>
+                    <!-- GANTI FOTO FOUNDER 4 DI BAWAH INI -->
+                    <div class="founder-placeholder">
+                        <img src="foto martie.jpeg" alt="Martie Tanzihatushafa=" founder-photo">
+                    </div>
+                    <div class="founder-overlay">
+                        <div class="founder-name">Martie Tanzihatushafa</div>
+                        <div class="founder-role">Brand &amp; Marketing Director</div>
+                        <div class="founder-bio">Memastikan setiap cerita Aksara tersampaikan dengan indah ke seluruh
+                            penjuru Nusantara.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="kawung-divider"></div>
+
+
+    <!-- ================================================================
+         4. TEAM VALUES
+    ================================================================ -->
+    <section class="values-section">
+        <div class="container">
+
+            <div class="values-header reveal">
+                <p class="section-label">Nilai yang Kami Pegang</p>
+                <h2 class="section-title-p">Tiga Nilai Tim Aksara</h2>
+            </div>
+
+            <div class="values-grid">
+
+                <!-- Kerjasama -->
+                <div class="value-card reveal">
+                    <div class="value-icon">
+                        <!-- Ikon: dua tangan bertaut — melambangkan Kerjasama -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9l6-6 6 6" />
+                            <path d="M6 15l6 6 6-6" />
+                            <line x1="12" y1="3" x2="12" y2="21" />
+                        </svg>
+                    </div>
+                    <h3 class="value-name">Kerjasama</h3>
+                    <p class="value-desc">Seperti motif batik yang terbentuk dari titik-titik kecil, Aksara dibangun
+                        oleh kontribusi setiap anggota tim. Kami percaya pada kekuatan kolektif dan saling mendukung.
+                    </p>
+                </div>
+
+                <!-- Integritas -->
+                <div class="value-card reveal delay-1">
+                    <div class="value-icon">
+                        <!-- Ikon: berlian / permata — melambangkan Integritas -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5" />
+                            <line x1="12" y1="2" x2="12" y2="22" />
+                            <line x1="2" y1="8.5" x2="22" y2="8.5" />
+                        </svg>
+                    </div>
+                    <h3 class="value-name">Integritas</h3>
+                    <p class="value-desc">Tidak ada batik palsu, tidak ada janji kosong. Dari bahan baku hingga
+                        kata-kata yang kami ucapkan, kami berkomitmen untuk selalu jujur kepada pelanggan dan diri
+                        sendiri.</p>
+                </div>
+
+                <!-- Kreativitas -->
+                <div class="value-card reveal delay-2">
+                    <div class="value-icon">
+                        <!-- Ikon: bunga / mekar — melambangkan Kreativitas -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M12 2 C12 2 14 6 12 9 C10 6 12 2 12 2Z" />
+                            <path d="M12 15 C12 15 14 19 12 22 C10 19 12 15 12 15Z" />
+                            <path d="M2 12 C2 12 6 14 9 12 C6 10 2 12 2 12Z" />
+                            <path d="M15 12 C15 12 19 14 22 12 C19 10 15 12 15 12Z" />
+                            <path d="M4.93 4.93 C4.93 4.93 7.76 7.76 7.05 10.3 C4.51 9.59 4.93 4.93 4.93 4.93Z" />
+                            <path d="M16.95 16.95 C16.95 16.95 19.07 19.07 16.95 21.21" />
+                        </svg>
+                    </div>
+                    <h3 class="value-name">Kreativitas</h3>
+                    <p class="value-desc">Batik adalah seni yang terus hidup. Kami merayakan keberanian untuk
+                        bereksperimen — mencoba motif baru, siluet tak terduga, dan kolaborasi lintas budaya yang
+                        mengejutkan.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================================================================
+         5. CLOSING QUOTE
+    ================================================================ -->
+    <section class="closing-section">
+        <div class="container">
+            <div class="closing-ornament reveal">
+                <div class="closing-ornament-line"></div>
+                <!-- Motif kawung kecil sebagai ornamen tengah -->
+                <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="14" cy="7" rx="5" ry="3.5" stroke-width="0.9" opacity="0.7" />
+                    <ellipse cx="14" cy="21" rx="5" ry="3.5" stroke-width="0.9" opacity="0.7" />
+                    <ellipse cx="7" cy="14" rx="3.5" ry="5" stroke-width="0.9" opacity="0.7" />
+                    <ellipse cx="21" cy="14" rx="3.5" ry="5" stroke-width="0.9" opacity="0.7" />
+                    <circle cx="14" cy="14" r="2.5" stroke-width="0.9" opacity="0.6" />
+                </svg>
+                <div class="closing-ornament-line right"></div>
+            </div>
+            <blockquote class="closing-quote reveal delay-1">
+                "Kami bukan hanya menjual kain. Kami mengundangmu untuk menjadi penjaga cerita yang telah diwariskan
+                selama berabad-abad."
+            </blockquote>
+            <p class="closing-quote-attr reveal delay-2">— Tim Aksara Batik</p>
+        </div>
+    </section>
+
+
+    <!-- ================================================================
+         FOOTER — IDENTIK DENGAN HOME & BACKSTORY
+    ================================================================ -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div>
+                    <span class="footer-logo">AB</span>
+                    <p class="footer-tagline">Menghadirkan keindahan warisan budaya Indonesia melalui desain batik
+                        modern yang elegan untuk gaya hidup masa kini.</p>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="profile.html">Tentang Kami</a></li>
+                        <li><a href="explore.html">Koleksi</a></li>
+                        <li><a href="backstory.html">Backstory</a></li>
+                        <li><a href="contact.html">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">Get in Touch</h4>
+                    <div class="footer-contact">
+                        <p>📍 Jl. Raya ITS No. 123, Surabaya</p>
+                        <p>📞 +62 821-4071-4633</p>
+                        <p>✉️ aksarabatik.ofc@gmail.com</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 AKSARA BATIK. INDONESIAN HERITAGE REIMAGINED.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================================================================
+         JAVASCRIPT — IDENTIK DENGAN HOME & BACKSTORY
+    ================================================================ -->
+    <script>
+        /* --- Dropdown About — IDENTIK dengan Home & Backstory --- */
+        function toggleAbout() {
+            const dropdown = document.getElementById("about-dropdown");
+            dropdown.classList.toggle("show");
+            dropdown.classList.toggle("hidden");
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.about-trigger')) {
+                const dropdowns = document.getElementsByClassName("about-menu");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        openDropdown.classList.add('hidden');
+                    }
+                }
+            }
+        };
+
+        /* --- Scroll reveal — menggunakan class .reveal (sesuai instruksi) --- */
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+</body>
+
+</html>
